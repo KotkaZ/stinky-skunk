@@ -20,7 +20,7 @@ public class MemoryController {
     }
 
     public int readInt(long address){
-        return csgoModule.readInt(address);
+        return csgoProcess.readInt(address);
     }
 
     public void writeFloat(long address, float value){
