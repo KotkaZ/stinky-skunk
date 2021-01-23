@@ -1,7 +1,9 @@
 import com.google.gson.Gson;
+import io.KeyboardController;
 import memory.MemoryController;
 import modules.GlowESP;
 import offsets.Offsets;
+import org.jnativehook.NativeHookException;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,10 +14,9 @@ public class Main {
         System.out.println("Reading in offsets...");
 
         Offsets offsets = null;
-        try{
+        try {
             offsets = readOffsets("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json");
-        }
-        catch (IOException ioException) {
+        } catch (IOException ioException) {
             System.out.println("Offsets reading failed.");
             ioException.printStackTrace();
             System.exit(1);
@@ -23,8 +24,12 @@ public class Main {
 
         MemoryController memController = new MemoryController();
         GlowESP glowESP = new GlowESP(memController, offsets.signatures, offsets.netvars);
-
-        while (true){
+        try {
+            KeyboardController keyboardController = new KeyboardController();
+        } catch (NativeHookException e) {
+            e.printStackTrace();
+        }
+        while (true) {
             glowESP.doWork();
         }
 
@@ -34,6 +39,6 @@ public class Main {
         URL url = new URL(_url);
         InputStreamReader reader = new InputStreamReader(url.openStream());
 
-        return new Gson().fromJson(reader,Offsets.class);
+        return new Gson().fromJson(reader, Offsets.class);
     }
 }
