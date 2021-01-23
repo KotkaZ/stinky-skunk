@@ -1,11 +1,10 @@
 import com.google.gson.Gson;
-import memory.memHandler;
+import memory.MemoryController;
 import modules.glowESP;
 import offsets.Offsets;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Main {
@@ -22,8 +21,8 @@ public class Main {
             System.exit(1);
         }
 
-        memHandler memHandler = new memHandler();
-        glowESP glowESP = new glowESP(memHandler, offsets.signatures, offsets.netvars);
+        MemoryController memController = new MemoryController();
+        glowESP glowESP = new glowESP(memController, offsets.signatures, offsets.netvars);
 
     }
 
