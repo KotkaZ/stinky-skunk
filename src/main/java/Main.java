@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import memory.MemoryController;
-import modules.glowESP;
+import modules.GlowESP;
 import offsets.Offsets;
 
 import java.io.IOException;
@@ -22,7 +22,11 @@ public class Main {
         }
 
         MemoryController memController = new MemoryController();
-        glowESP glowESP = new glowESP(memController, offsets.signatures, offsets.netvars);
+        GlowESP glowESP = new GlowESP(memController, offsets.signatures, offsets.netvars);
+
+        while (true){
+            glowESP.doWork();
+        }
 
     }
 
