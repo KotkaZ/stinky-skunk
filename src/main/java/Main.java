@@ -1,4 +1,6 @@
 import com.google.gson.Gson;
+import memory.memHandler;
+import modules.glowESP;
 import offsets.Offsets;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public class Main {
             System.exit(1);
         }
 
+        memHandler memHandler = new memHandler();
+        glowESP glowESP = new glowESP(memHandler, offsets.signatures, offsets.netvars);
 
     }
 
